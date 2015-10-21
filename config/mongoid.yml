@@ -135,22 +135,21 @@ test:
         max_pool_size: 1
 
 production:
- sessions:
-   default:
+  sessions:
+    default:
      # The standard MongoDB connection URI allows for easy
      # replica set connection setup.
      # Use environment variables or a config file to keep your
      # credentials safe e.g. <%= ENV['MONGOLAB_URI'] %>.
-     uri: <%= ENV['MONGOLAB_URI'] %>
-
-     options:
+      uri: <%= ENV['MONGOLAB_URI'] %>
+      options:
        # max_retries specifies the number of times to attempt
        # an operation before giving up.
-       max_retries: 30
+        max_retries: 30
 
        # retry_interval specifies the number of seconds to wait
        # before retrying a single operation.
-       retry_interval: 1
+        retry_interval: 1
 
        # The default timeout is 5, which is the time in seconds
        # for an operation to time out.
@@ -162,11 +161,11 @@ production:
        # (over 30 seconds), it will time out.
        # See our example for long-running queries in the blog
        # post referenced above.
-       timeout: 15
+        timeout: 15
 
        # refresh_interval specifies the number of seconds to cache server information.
        # Lowering this number will help the driver recover more quickly from changes to replica set reconfiguration
-       refresh_interval: 10
+        refresh_interval: 10
 
        # pool_size default size is 5 connections.
        # If you're running a lot of threads, you may consider increasing pool_size
