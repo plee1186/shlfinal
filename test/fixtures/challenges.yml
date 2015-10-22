@@ -2,16 +2,18 @@
 
 one:
   name: MyString
+  description: MyText
+  restaurant: MyString
   address: MyString
   city: MyString
   state: MyString
   zip: 1
-  challenge: MyString
 
 two:
   name: MyString
+  description: MyText
+  restaurant: MyString
   address: MyString
   city: MyString
   state: MyString
   zip: 1
-  challenge: MyString
