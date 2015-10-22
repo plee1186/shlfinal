@@ -20,6 +20,14 @@
     <%= f.text_area :description %>
   </div>
   <div class="field">
+    <%= f.label :difficulty %> (1 easiest, 5 hardest)<br>
+    <p>1<%= f.radio_button :difficulty, 1 %>
+    2<%= f.radio_button :difficulty, 2 %>
+    3<%= f.radio_button :difficulty, 3 %>
+    4<%= f.radio_button :difficulty, 4 %>
+    5<%= f.radio_button :difficulty, 5 %></p>
+  </div>
+  <div class="field">
     <%= f.label :restaurant %><br>
     <%= f.text_field :restaurant %>
   </div>
@@ -33,7 +41,7 @@
   </div>
   <div class="field">
     <%= f.label :state %><br>
-    <%= f.text_field :state %>
+    <%= f.select :state, options_for_select(us_states, @challenge.state) %>
   </div>
   <div class="field">
     <%= f.label :zip %><br>
