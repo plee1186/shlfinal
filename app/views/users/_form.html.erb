@@ -33,11 +33,8 @@
     <%= f.select :yob, 1900.. Date.today.year %>
   </div>
   <div class="field">
-    <%= f.label :tos %><br>
-    <%= f.label :tos, "Yes" %>
-    <%= f.check_box :tos, { :multiple => false }, "yes", nil %>
-    <%= f.label :tos, "No" %>
-    <%= f.check_box :tos, {:multiple => false }, "no", nil %>
+    <%= f.label :tos, "Terms of Service" %><br>
+    <%= f.check_box :tos %>Accept
   </div>
   <div class="actions">
     <%= f.submit %>
