@@ -5,5 +5,7 @@ class User
   field :lname, type: String
   field :gender, type: String
   field :yob, type: Integer
+  field :tos, type: String
   has_many :challenges
+  
 end
