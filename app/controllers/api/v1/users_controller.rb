@@ -21,7 +21,7 @@ class Api::V1::UsersController < ApplicationController
     
     ##/api/v1/users(:format) (POST) //
     def create
-        @user = User.create(email: params[:email], fname: params[:fname], lname: params[:lname], yob: params[:yob], tos: params[:tos])
+        @user = User.create(email: params[:email], fname: params[:fname], gender: params[:gender], lname: params[:lname], yob: params[:yob], tos: params[:tos])
         if @user.save
             respond_to do |format|
                 format.json { render json: JSON.pretty_generate(JSON.parse(@user.to_json())) }
@@ -51,7 +51,7 @@ class Api::V1::UsersController < ApplicationController
             render text: "User with id #{params[:id]} cannot be found"
         else
             @user = User.find(params[:id])
-            @user.update(email: params[:email], fname: params[:fname], lname: params[:lname], yob: params[:yob], tos: params[:tos])
+            @user.update(email: params[:email], gender: params[:gender], fname: params[:fname], lname: params[:lname], yob: params[:yob], tos: params[:tos])
             respond_to do |format|
                 format.json { render json: JSON.pretty_generate(JSON.parse(@user.to_json())) }
             end
