@@ -13,7 +13,7 @@ class Api::V1::UsersController < ApplicationController
     def show
         @user = User.find(params[:id])
         if @user.nil?
-            render :status => 404, :json => {:status => "error", :errorcode => "11009", :message => "Invalid userid."}
+            render text: "User with id #{params[:id]} cannot be found"
         else
             render json: JSON.pretty_generate(JSON.parse(@user.to_json()))
         end
