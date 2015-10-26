@@ -18,5 +18,5 @@ class Challenge
   #validates :zip, presence: true
   validates_format_of :zip, with: /\A\d{5}-\d{4}|\A\d{5}\z/, message: "Please enter a valid zip code", allows_blank: false
   validates :difficulty, presence: true, numericality: { only_integer: true, greater_than_equal_to: 0 }
-  
+  has_and_belongs_to_many :users
 end
