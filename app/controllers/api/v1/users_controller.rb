@@ -24,7 +24,6 @@ class Api::V1::UsersController < ApplicationController
         @user = User.create(email: params[:email], fname: params[:fname], gender: params[:gender], lname: params[:lname], yob: params[:yob], tos: params[:tos])
         if @user.save
             respond_to do |format|
-                format.html
                 format.json { render json: JSON.pretty_generate(JSON.parse(@user.to_json())) }
             end
         else
