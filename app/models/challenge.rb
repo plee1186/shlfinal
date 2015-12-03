@@ -9,6 +9,8 @@ class Challenge
   field :zip, type: String
   field :difficulty, type: Integer
   
+  belongs_to :users
+  
   validates :name, presence: true
   validates :description, presence: true, length: { maximum: 200 }
   validates :restaurant, presence: true
