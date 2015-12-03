@@ -9,7 +9,7 @@ class Challenge
   field :zip, type: String
   field :difficulty, type: Integer
   
-  has_and_belongs_to_many :user
+  references_many :users, stored_as => :array, inverse_of => :users
   
   validates :name, presence: true
   validates :description, presence: true, length: { maximum: 200 }
