@@ -5,7 +5,6 @@ class User
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   
-  references_many :chellenges, stored_as => :array, inverse_of => :chellenges
   
   ## Database authenticatable
   field :email,              type: String, default: ""
