@@ -4,6 +4,15 @@ class User
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+         
+  # You likely have this before callback set up for the token.
+  # before_save :ensure_authentication_token
+  # private
+  # def ensure_authentication_token
+  #   if authentication_token.blank?
+  #     self.authentication_token = generate_authentication_token
+  #   end
+  # end
   
   ## Database authenticatable
   field :email,              type: String, default: ""
@@ -35,23 +44,6 @@ class User
   # field :failed_attempts, type: Integer, default: 0 # Only if lock strategy is :failed_attempts
   # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
   # field :locked_at,       type: Time
-  
-  # You likely have this before callback set up for the token.
-  before_save :ensure_authentication_token
 
-  def ensure_authentication_token
-    if authentication_token.blank?
-      self.authentication_token = generate_authentication_token
-    end
-  end
-
-  private
-  
-  def generate_authentication_token
-    loop do
-      token = Devise.friendly_token
-      break token unless User.where(authentication_token: token).first
-    end
-  end
   
 end
