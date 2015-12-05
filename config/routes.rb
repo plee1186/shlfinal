@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'complete_challenges/complete'
 
-  devise_for :users
+  devise_for :users, skip: :sessions
   resources :challenges
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
