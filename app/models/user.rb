@@ -10,7 +10,7 @@ class User
   field :email,              type: String, default: ""
   field :encrypted_password, type: String, default: ""
   
-  embeds_many :challenges
+  has_and_belongs_to_many :challenges
   
   ## Recoverable
   field :reset_password_token,   type: String
