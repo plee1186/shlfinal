@@ -38,6 +38,7 @@ class User
   # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
   # field :locked_at,       type: Time
   
+  # You likely have this before callback set up for the token.
   before_save :ensure_authentication_token
 
   def ensure_authentication_token
@@ -45,7 +46,7 @@ class User
       self.authentication_token = generate_authentication_token
     end
   end
-  
+
   private
   
   def generate_authentication_token
@@ -54,4 +55,5 @@ class User
       break token unless User.where(authentication_token: token).first
     end
   end
+  
 end
