@@ -15,7 +15,7 @@ class UserSpecificController < ApplicationController
     @challenge = Challenge.find(c_id)
     #render json: JSON.pretty_generate(JSON.parse(@challenge.to_json()))
     
-    if @user.push(challenge_ids: @challenge.id)
+    if @user.push(challenge_ids: @challenge.id) and @challenge.push(user_ids: @user.id)
       flash[:success] = "#{@challenge.name} successfully completed!"
       redirect_to profile_path
     else
