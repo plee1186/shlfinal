@@ -8,7 +8,6 @@ class UserSpecificController < ApplicationController
   
   #GET list of incomplete challenges
   def add
-    @user = current_user
   end
   
   def create

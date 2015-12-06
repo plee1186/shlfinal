@@ -10,9 +10,9 @@
             <th>Select</th>
         </thead>
     <tbody>
-    <%= form_for(@user, url: user_specific_create_path, method: :patch) do |f| %>
+    <%= form_for(current_user, url: user_specific_create_path, method: :patch) do |f| %>
         <% Challenge.all.each do |c|%>
-            <% unless @user.challenge_ids.include?(c.id) %>
+            <% unless current_user.challenge_ids.include?(c.id) %>
             <tr>
                 <td><%= c.name %></td>
                 <td><%= c.id %></td>
