@@ -13,6 +13,18 @@
     <% if logged_in? %>
         <h2><%= link_to "#{current_user.user_name}'s Profile", profile_path %></h2>
         <h2>Not <%= current_user.user_name %>? <%= button_to "Logout", logout_path, method: :delete %></h2>
+    <% else %>
+        <h2><%= link_to "Log in", login_path %></h2>
+        <h2><%= link_to "Sign up", new_user_path %></h2>
+    <% end %>
+</div>
+
+<br><br>
+<div>
+    <% if flash[:danger] %>
+      <div class="notice"><%= flash[:danger] %></div>
+    <% elsif flash[:success] %>
+        <div class="notice"><%= flash[:success] %></div>
     <% end %>
 </div>
 <!--<div>

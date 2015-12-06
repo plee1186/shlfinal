@@ -4,10 +4,10 @@ Rails.application.routes.draw do
   # get 'sessions_controller/destroy'
   
   get 'signup' => 'users#new'
-  get 'login' => 'sessions#new'
-  post 'login' => 'sessions#create'
-  #delete 'logout' => 'sessions#destroy'
-  delete 'logout' => 'sessions#destroy'
+  get 'login' => 'sessions_controller#new'
+  post 'login' => 'sessions_controller#create'
+  delete 'logout' => 'sessions_controller#destroy'
+
   get 'profile' => 'users#profile'
 
   get 'user_specific/list'
