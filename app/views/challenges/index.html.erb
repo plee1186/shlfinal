@@ -29,14 +29,5 @@
   </tbody>
 </table>
 
-<br><br>
-
-<p>Current users</p>
-<% @users.each do |user| %>
-  <div><%= JSON.pretty_generate(JSON.parse(user.to_json())) %></div>
-<% end %>
-
-<br><br>
-
 <%= link_to 'New Challenge', new_challenge_path %><br><br>
 
