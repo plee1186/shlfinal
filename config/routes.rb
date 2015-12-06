@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'user_specific/list'
   get 'user_specific/add'
-  patch 'user_specific/create'
+  post 'user_specific/create'
 
   devise_for :users
   resources :challenges
