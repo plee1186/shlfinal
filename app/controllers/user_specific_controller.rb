@@ -1,5 +1,7 @@
 class UserSpecificController < ApplicationController
-
+  #prepend_before_filter :authenticate_scope!, only: :create
+  prepend_before_filter :require_no_authentication
+  
   def list
     @user = current_user
     #render json: JSON.pretty_generate(JSON.parse(User.all.to_json()))
@@ -27,5 +29,12 @@ class UserSpecificController < ApplicationController
 #      end
 #     end
   end
+  
+  # private
+  
+  # def authenticate_scope!
+  #   send(:"authenticate_#{resource_name}!", force: true)
+  #   self.resource = send(:"current_#{resource_name}")
+  # end
 end
 
