@@ -33,7 +33,7 @@
 
 <p>Current users</p>
 <% @users.each do |user| %>
-  <li><%= user.email %></li>
+  <div><%= JSON.pretty_generate(JSON.parse(user.to_json())) %></div>
 <% end %>
 
 <br><br>
