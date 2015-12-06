@@ -1,12 +1,26 @@
 <div>
     <h1><%= @user.email %></h1>
+    <h1><%= @user.id %></h1>
     
     <% if @user.challenge_ids.empty? %>
         <p>You have no completed any challenges yet. <%= link_to "Add Completed challenges", user_specific_add_path %></p>
     <% else %>
-        <%= @user.challenge_ids.each do |x| %>
-            <li><%= x %></li>
+        <table border=1>
+            <thead>
+                <th>Challenge name</th>
+                <th>Challenge id</th>
+            </thead>
+        <tbody>
+        <% Challenge.all.each do |c|%>
+            <% if @user.challenge_ids.include?(c.id) %>
+            <tr>
+                <td><%= c.name %></td>
+                <td><%= c.id %></td>
+            </tr>
+            <% end %>
         <% end %>
+        </tbody>
+        </table>
     <% end %>
             
     <p>Find me in app/views/user_specific/list.html.erb</p>

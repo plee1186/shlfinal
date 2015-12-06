@@ -1,15 +1,34 @@
 <div>
-    <h1><%= @user.email %></h1>
+    <h1><%= current_user.email %></h1>
+    <h1><%= current_user.id %></h1>
     
     <table border=1>
-     <% @challenges.each do |challenge| %>
-      <tr>
-        <td><%= challenge.id%></td>
-        <td><%= challenge.name %></td>
-      </tr>
+        <thead>
+            <th>Challenge name</th>
+            <th>Challenge id</th>
+            <th>Difficulty</th>
+            <th>Select</th>
+        </thead>
+    <tbody>
+    <%= form_for(@user, url: user_specific_create_path, method: :patch) do |f| %>
+        <% Challenge.all.each do |c|%>
+            <% unless @user.challenge_ids.include?(c.id) %>
+            <tr>
+                <td><%= c.name %></td>
+                <td><%= c.id %></td>
+                <td><%= c.difficulty %></td>
+                <td><%= radio_button_tag :challenge_ids, c.id %></td>
+            </tr>
+            <% end %>
+        <% end %>
+        </tbody>
+    </table><br>
+    <div class="actions">
+        <%= f.submit 'Add completed challenge' %>
+    </div>
     <% end %>
-    </table>
-    
+
+    <br>
     <br>
     <p>Find me in app/views/user_specific/add.html.erb</p>      
 </div>
