@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'user_specific/list'
+
+  get 'user_specific/add'
 
   devise_for :users
   resources :challenges

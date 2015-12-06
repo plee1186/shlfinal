@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Sapp44</title>
+  <title>SHLPROJECT</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -12,9 +12,8 @@
     <% if user_signed_in? %>
         Hello, <%=  current_user.email %> <%= link_to "Edit Account", edit_user_registration_path %><br>
         Not <%= current_user.email %>? <%= link_to "Sign out", destroy_user_session_path, :method => :delete %><br>
-        <%#= link_to "Completed Challenges", user_challenges_home_path %><br>
-        <%#= link_to "Add Challenges", user_challenges_add_path %><br>
-        
+        <%= link_to "List Completed challenges", user_specific_list_path %><br>
+        <%= link_to "Add Completed challenges", user_specific_add_path %><br>
         
     <% else %>
         Have an account? <%= link_to "Sign in", new_user_session_path %><br>
@@ -23,6 +22,8 @@
 </div>
 
 <%= yield %>
+
+
 
 </body>
 </html>
