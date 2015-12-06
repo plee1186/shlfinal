@@ -11,7 +11,11 @@
 <div>
     <% if user_signed_in? %>
         Hello, <%=  current_user.email %> <%= link_to "Edit Account", edit_user_registration_path %><br>
-        Not <%= current_user.email %>? <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+        Not <%= current_user.email %>? <%= link_to "Sign out", destroy_user_session_path, :method => :delete %><br>
+        <%#= link_to "Completed Challenges", user_challenges_home_path %><br>
+        <%#= link_to "Add Challenges", user_challenges_add_path %><br>
+        
+        
     <% else %>
         Have an account? <%= link_to "Sign in", new_user_session_path %><br>
         Need an account? <%= link_to "Sign up", new_user_registration_path %>
