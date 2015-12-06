@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
+  resources :users
   get 'user_specific/list'
   get 'user_specific/add'
   post 'user_specific/create'
 
-  devise_for :users
   resources :challenges
   
   # The priority is based upon order of creation: first created -> highest priority.
