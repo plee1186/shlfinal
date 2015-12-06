@@ -1,5 +1,14 @@
 <div>
     <h1><%= @user.email %></h1>
+    
+    <% if @user.challenge_ids.empty? %>
+        <p>You have no completed any challenges yet. <%= link_to "Add Completed challenges", user_specific_add_path %></p>
+    <% else %>
+        <%= @user.challenge_ids.each do |x| %>
+            <li><%= x %></li>
+        <% end %>
+    <% end %>
+            
     <p>Find me in app/views/user_specific/list.html.erb</p>
 </div>
 

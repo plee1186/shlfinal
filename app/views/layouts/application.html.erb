@@ -11,7 +11,7 @@
 <div>
     <% if user_signed_in? %>
         Hello, <%=  current_user.email %> <%= link_to "Edit Account", edit_user_registration_path %><br>
-        Not <%= current_user.email %>? <%= link_to "Sign out", destroy_user_session_path, :method => :delete %><br>
+        Not <%= current_user.email %>? <%= link_to "Sign out", destroy_user_session_path, :method => :delete %><br><br>
         <%= link_to "List Completed challenges", user_specific_list_path %><br>
         <%= link_to "Add Completed challenges", user_specific_add_path %><br>
         
