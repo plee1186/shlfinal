@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   post 'login' => 'sessions_controller#create'
   delete 'logout' => 'sessions_controller#destroy'
 
-  get 'profile' => 'users#profile'
+  get 'profile' => 'user_specific#profile'
 
   get 'user_specific/list'
   get 'user_specific/add'
