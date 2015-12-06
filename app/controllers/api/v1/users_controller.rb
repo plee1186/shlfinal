@@ -2,7 +2,6 @@ class Api::V1::UsersController < ApplicationController
     #Api::V1::BaseController
     protect_from_forgery with: :null_session
     
-    
     #/api/v1/users (GET all users) //
     def index
         @users = User.all
@@ -21,7 +20,7 @@ class Api::V1::UsersController < ApplicationController
     
     ##/api/v1/users(:format) (POST) //
     def create
-        @user = User.create(email: params[:email], fname: params[:fname], gender: params[:gender], lname: params[:lname], yob: params[:yob], tos: params[:tos])
+        @user = User.create(user_name: params[:user_name], password: params[:password], password_confirmation: params[:password_confirmation])
         if @user.save
             respond_to do |format|
                 format.json { render json: JSON.pretty_generate(JSON.parse(@user.to_json())) }
@@ -30,7 +29,6 @@ class Api::V1::UsersController < ApplicationController
             format.json { redirect_to api_v1_users_path, notice: "User could not be created" }
         end
     end
-    
     
     #/api/v1/users/:id (DELETE) //
     def destroy
@@ -57,5 +55,4 @@ class Api::V1::UsersController < ApplicationController
             end
         end
     end
-    
 end

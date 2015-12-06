@@ -4,22 +4,29 @@
   <title>SHLPROJECT</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%#= javascript_include_tag :defaults %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-  
+
 <div>
-    <% if user_signed_in? %>
-        Hello, <%=  current_user.email %> <%= link_to "Edit Account", edit_user_registration_path %><br>
-        Not <%= current_user.email %>? <%= link_to "Sign out", destroy_user_session_path, :method => :delete %><br><br>
-        <%= link_to "List Completed challenges", user_specific_list_path %><br>
-        <%= link_to "Add Completed challenges", user_specific_add_path %><br>
-        
-    <% else %>
-        Have an account? <%= link_to "Sign in", new_user_session_path %><br>
-        Need an account? <%= link_to "Sign up", new_user_registration_path %>
+    <% if logged_in? %>
+        <h2><%= link_to "#{current_user.user_name}'s Profile", profile_path %></h2>
+        <h2>Not <%= current_user.user_name %>? <%= button_to "Logout", logout_path, method: :delete %></h2>
     <% end %>
 </div>
+<!--<div>
+    <%# if user_signed_in? %>
+        Hello, <%#=  current_user.email %> <%#= link_to "Edit Account", edit_user_registration_path %><br>
+        Not <%#= current_user.email %>? <%#= link_to "Sign out", destroy_user_session_path, :method => :delete %><br><br>
+        <%#= link_to "List Completed challenges", user_specific_list_path %><br>
+        <%#= link_to "Add Completed challenges", user_specific_add_path %><br>
+        
+    <#% else %>
+        Have an account? <%#= link_to "Sign in", new_user_session_path %><br>
+        Need an account? <%#= link_to "Sign up", new_user_registration_path %>
+    <#% end %>
+</div>-->
 
 <%= yield %>
 

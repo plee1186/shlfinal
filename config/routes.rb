@@ -1,17 +1,28 @@
 Rails.application.routes.draw do
-  resources :users
+  # get 'sessions_controller/new'
+  # get 'sessions_controller/create'
+  # get 'sessions_controller/destroy'
+  
+  get 'signup' => 'users#new'
+  get 'login' => 'sessions#new'
+  post 'login' => 'sessions#create'
+  #delete 'logout' => 'sessions#destroy'
+  delete 'logout' => 'sessions#destroy'
+  get 'profile' => 'users#profile'
+
   get 'user_specific/list'
   get 'user_specific/add'
   post 'user_specific/create'
 
   resources :challenges
+  resources :users
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
    #root 'challenges#index'
-  root 'challenges#index'
+  root 'users#index'
   
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
