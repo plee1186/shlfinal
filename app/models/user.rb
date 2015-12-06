@@ -17,6 +17,7 @@ class User
   ## Database authenticatable
   field :email,              type: String, default: ""
   field :encrypted_password, type: String, default: ""
+  #field :challenge_ids, type: Array, default: []
   
   has_and_belongs_to_many :challenges
   
@@ -34,8 +35,6 @@ class User
   #field :current_sign_in_ip, type: String
   #field :last_sign_in_ip,    type: String
 
-  field :challenge_ids, type: Array
-  
   ## Confirmable
   # field :confirmation_token,   type: String
   # field :confirmed_at,         type: Time

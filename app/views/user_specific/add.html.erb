@@ -1,2 +1,17 @@
-<h1>UserSpecific#add</h1>
-<p>Find me in app/views/user_specific/add.html.erb</p>
+<div>
+    <h1><%= @user.email %></h1>
+    
+    <table border=1>
+     <% @challenges.each do |challenge| %>
+      <tr>
+        <td><%= challenge.id%></td>
+        <td><%= challenge.name %></td>
+      </tr>
+    <% end %>
+    </table>
+    
+    <br>
+    <p>Find me in app/views/user_specific/add.html.erb</p>      
+</div>
+
+

@@ -4,6 +4,7 @@ class UserSpecificController < ApplicationController
   end
 
   def add
-    
+    @user = current_user
+    @challenges = Challenge.all
   end
 end
