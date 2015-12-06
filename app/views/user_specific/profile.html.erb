@@ -1,0 +1,32 @@
+<h1>User: <%= current_user.user_name %></h1>
+<h1>User_id: <%= current_user.id %></h1>
+<h5>User Obj as JSON: <%= JSON.pretty_generate(JSON.parse(current_user.to_json())) %></h5>
+<br>
+
+<div>
+    <h3>Challenges completed</h3>
+    <% if @user.challenge_ids.empty? %>
+        <p>You have no completed any challenges yet. <%= link_to "Add Completed challenges", user_specific_add_path %></p>
+    <% else %>
+        <table border=1>
+            <thead>
+                <th>Challenge name</th>
+                <th>Challenge id</th>
+            </thead>
+        <tbody>
+        <% Challenge.all.each do |c|%>
+            <% if @user.challenge_ids.include?(c.id) %>
+            <tr>
+                <td><%= c.name %></td>
+                <td><%= c.id %></td>
+            </tr>
+            <% end %>
+        <% end %>
+        </tbody>
+        </table>
+        <p>Add another challenge!. <%= link_to "Add Completed challenges", user_specific_add_path %></p>
+    <% end %>
+</div>
+
+<br>
+<%= link_to "See all user's JSON", api_v1_users_path %>

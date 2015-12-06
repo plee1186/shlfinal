@@ -1,0 +1,25 @@
+<%= form_for(current_user, url: user_specific_create_path, method: :post) do |f| %>
+    <table border=1>
+        <thead>
+            <th>Challenge name</th>
+            <th>Challenge id</th>
+            <th>Difficulty</th>
+            <th>Select</th>
+        </thead>
+    <tbody>
+        <% Challenge.all.each do |c|%>
+            <% unless current_user.challenge_ids.include?(c.id) %>
+            <tr>
+                <td><%= c.name %></td>
+                <td><%= c.id %></td>
+                <td><%= c.difficulty %></td>
+                <td><%= radio_button_tag :challenge_ids, c.id %></td>
+            </tr>
+            <% end %>
+        <% end %>
+        </tbody>
+    </table><br>
+    <div class="actions">
+        <%= f.submit 'Add completed challenge' %>
+    </div>
+    <% end %>
