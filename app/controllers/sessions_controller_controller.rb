@@ -17,11 +17,6 @@ class SessionsControllerController < ApplicationController
   
   def destroy
     log_out
-      #flash[:success] = "Successfully logged out"
-    #respond_to do |format|
-      #format.html { redirect_to users_url, flash[:success] = 'User successfully logged out.' }
-      #format.json { head :no_content }
-    #end
     flash[:success] = "User successfully logged out"
     redirect_to users_url
   end

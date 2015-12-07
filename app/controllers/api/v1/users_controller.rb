@@ -20,9 +20,9 @@ class Api::V1::UsersController < Api::V1::BaseController
     def create
         @user = User.create(create_params)
         if @user.save
-            render json: @user, status: 201, location: api_v1_users_path(user.id)
+            render json: @user, status: 201, location: api_v1_users_path(@user.id)
         else
-            return api_error(status: 422, errors: user.errors) 
+            render json: { error: "Application error", status: 400 }, status: 400
         end
     end
     
@@ -34,7 +34,7 @@ class Api::V1::UsersController < Api::V1::BaseController
         if user.destroy
             head status: 204
         else
-            return api_error(status: 500)
+            render json: { error: "Server error", status: 500 }, status: 500
         end
     end
     
@@ -43,9 +43,9 @@ class Api::V1::UsersController < Api::V1::BaseController
         user = User.find(params[:id])
         authorize user
         if user.update(update_params)
-            render json: user, status: 200, location: api_v1_users_path(user.id)
+            render json: user, status: 200, location: api_v1_user_path(user.id)
         else
-            return api_error(status: 422, errors: user.errors) 
+            render json: { error: "Application error", status: 422 }, status: 422
         end
     end
     

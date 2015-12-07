@@ -1,17 +1,20 @@
 class Api::V1::ChallengesController < Api::V1::BaseController
+    ##This controller is not for others to use. I would put an admin role
+    ##on the user so they can add into the challenges database
+    
     #/api/v1/challenges (GET all challenges) //
     def index
-        @challenges = Challenges.all
-        render json: JSON.pretty_generate(JSON.parse(@challenges.to_json()))
+        @challenges = Challenge.all
+        render json: @challenges
     end
     
-    #/api/v1/users/:id (GET user) //
+    #/api/v1/users/:id (GET challenge) //
     def show
-        @challenge = User.find(params[:id])
+        @challenge = Challenge.find(params[:id])
         if @challenge.nil?
-            render json: { error: "No Challenge with id: #{params[:id]}", status: 400 }, status: 400
+            render json: { error: "Not found", status: 400 }, status: 400
         else
-            render json: JSON.pretty_generate(JSON.parse(@challenge.to_json()))
+            render json: @challenge
         end
     end
     
@@ -19,23 +22,20 @@ class Api::V1::ChallengesController < Api::V1::BaseController
     def create
         @challenge = Challenge.new(challenge_params)
         if @challenge.save
-            #respond_to do |format|
-            render json: JSON.pretty_generate(JSON.parse(@challenge.to_json()))
-            #format.json { render json: JSON.pretty_generate(JSON.parse(@user.to_json())) }
+            render json: @challenge
         else
-            render json: { error: "Could not create challege", status: 400 }, status: 400
+            render json: { error: "Application error", status: 400 }, status: 400
         end
     end
     
     #/api/v1/users/:id (DELETE) //
     def destroy
         if Challenge.find(params[:id]).nil?
-            #format.json { redirect_to api_v1_users_path, notice: "User with id #{params[:id]} cannot be found" }
-            render json: { error: "No Challenge with id: #{params[:id]}", status: 400 }, status: 400
+            render json: { error: "Application error", status: 400 }, status: 400
         else
             @challenge = Challenge.find(params[:id])
             if @challenge.destroy
-                render json: { success: "User deleted", status: 200 }, status: 200
+                head status: 204
             end
         end
     end
@@ -43,12 +43,13 @@ class Api::V1::ChallengesController < Api::V1::BaseController
     #api/v1/users/:id(.:format) (PUT) //
     def update
         if Challenge.find(params[:id]).nil?
-            render json: { error: "No Challenge with id: #{params[:id]}", status: 400 }, status: 400
+            render json: { error: "Application error", status: 400 }, status: 400
         else
             @challenge = Challenge.find(params[:id])
-            @challenge.update(challenge_params)
-            respond_to do |format|
-                format.json { render json: JSON.pretty_generate(JSON.parse(@user.to_json())) }
+            if @challenge.update(challenge_params)
+                render json: @challenge, status: 200, location: api_v1_challenge_path(@challenge.id)
+            else
+                render json: { error: "Server error", status: 500 }, status: 500
             end
         end
     end
