@@ -47,6 +47,7 @@ class UserSpecificController < ApplicationController
   # DELETE /shoutouts/1
   # DELETE /shoutouts/1.json
   def destroyshout
+    @shoutout = Shoutout.find(params[:format])
     @shoutout.destroy
     redirect_to profile_path(current_user)
   end

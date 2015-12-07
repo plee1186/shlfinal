@@ -39,13 +39,15 @@
             <% if @user.shoutout_ids.include?(s.id) %>
                 <p><%= s.content %></p>
                 <p><%= s.created_at %></p>
-                <p><%= button_to "Delete", user_specific_destroyshout_path, method: :delete %></p>
+                <p><%= button_to "Delete", user_specific_destroyshout_path(s.id), method: :delete %></p>
                 <br>
             <% end %>
         <% end %>
+    <% end %>
     <p><%= link_to "Make another shoutout", user_specific_newshout_path %></p>
 </div>
 <br>
-<%= link_to "All users", users_paath %>
+
+<%= link_to "All users", users_path %>
 <%= link_to "All challenges", challenges_path %>
 <%= link_to "The Message boards", shoutouts_path %>

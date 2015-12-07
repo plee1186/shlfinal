@@ -2,10 +2,12 @@
 
 <h1>Listing Shoutouts</h1>
 
-<table>
+<table border=1>
   <thead>
     <tr>
       <th>Content</th>
+      <th>Created at</th>
+      <th>Created by</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,6 +16,16 @@
     <% @shoutouts.each do |shoutout| %>
       <tr>
         <td><%= shoutout.content %></td>
+        <td><%= shoutout.created_at %></td>
+        <td><% @user.each do |x| %>
+            <% if shoutout.id.include?(x.shoutout_ids) %>
+              <%= x.user_name %>
+            <% else %>
+              <% "Anonymouse" %>
+            <% end %>
+          <% end %>
+        <% end %>  
+        </td>
       </tr>
     <% end %>
   </tbody>
