@@ -10,23 +10,15 @@ class Api::V1::ChallengesController < Api::V1::BaseController
         render json: @challenges
     end
     
-    #get a list of challenges the user hasnt completed yet //
+    #get a list of challenges the user completed completed yet //
     def show
-        @user = User.find(params[:id])
-        if @user.challenge_ids.empty?
-            @challenges = Challenge.all
-            render json: @challenges
-        else
-            @challenges = Challenge.find
+        @challenges = Challenge.where(user_ids: params[:id])
+        @challenges = policy_scope(@challenge)
                 
-        if @challenge.nil?
-            render json: { error: "Not found", status: 400 }, status: 400
-        else
-            render json: @challenge
-        end
+        render json: @challenge
     end
     
-    ##/api/v1/users(:format) (POST) //
+    ##add a challenge the user completed POST
     def create
         @challenge = Challenge.new(challenge_params)
         if @challenge.save
@@ -65,6 +57,6 @@ class Api::V1::ChallengesController < Api::V1::BaseController
     private
     
     def challenge_params
-        params.require(:challenge).permit(:name, :description, :difficulty, :restaurant, :address, :city, :state, :zip)
+        params.require(:challenge).permit(:name, :description, :difficulty, :restaurant, :address, :city, :state, :zip, :user_ids)
     end
 end
