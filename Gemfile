@@ -27,10 +27,12 @@ gem 'bson_ext'
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt'
-
+gem 'active_model_serializers', '0.9.2'
+gem 'pundit'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
+gem 'rack-cors', :require => 'rack/cors'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

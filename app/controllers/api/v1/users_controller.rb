@@ -1,21 +1,17 @@
-class Api::V1::UsersController < ApplicationController
+class Api::V1::UsersController < Api::V1::BaseController
     #Api::V1::BaseController
     protect_from_forgery with: :null_session
     
     #/api/v1/users (GET all users) //
     def index
         @users = User.all
-        render json: JSON.pretty_generate(JSON.parse(@users.to_json()))
+        render json: @users
     end
     
     #/api/v1/users/:id (GET user) //
     def show
         @user = User.find(params[:id])
-        if @user.nil?
-            render text: "User with id #{params[:id]} cannot be found"
-        else
-            render json: JSON.pretty_generate(JSON.parse(@user.to_json()))
-        end
+        render json: @user
     end
     
     ##/api/v1/users(:format) (POST) //

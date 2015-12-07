@@ -1,4 +1,4 @@
-class Api::V1::ChallengesController < ApplicationController
+class Api::V1::ChallengesController < Api::V1::BaseController
     protect_from_forgery with: :null_session
     
     #/api/v1/challenges (GET all challenges) //
