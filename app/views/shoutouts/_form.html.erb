@@ -1,0 +1,9 @@
+<%= form_for(current_user, url: new_shoutout_path, method: :post) %>
+  <div class="field">
+    <%= f.label :content %><br>
+    <%= f.text_area :content %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -29,4 +29,21 @@
 </div>
 
 <br>
+<div>
+    <h3><% "#{@user.user_name}'s shoutout posts" %></h3>
+    <% if @user.shoutout_ids.empty? %>
+        <p>You have not made any Shoutouts yet. <%= link_to "Make a Shoutout", new_shoutout_path %></p>
+    <% else %>
+         <% Shoutout.all.each do |c|%>
+             <% @user.shoutout_ids.include?(c.id)%>
+         <p><% c.content %> || Created: <% c.created_at.date %> ||
+         <%= link_to 'Delete Shoutout', c, method: :delete, data: { confirm: 'Are you sure?' } %>
+         </p>
+         <% end %>
+    <% end %>
+    <p><%= link_to "Make another shoutout", new_shoutout_path %></p>
+</div>
+
+
+<br>
 <%= link_to "See all user's JSON", api_v1_users_path %>

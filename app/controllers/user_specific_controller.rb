@@ -13,7 +13,6 @@ class UserSpecificController < ApplicationController
     c_id = params['challenge_ids']
     c_id = c_id.to_s
     @challenge = Challenge.find(c_id)
-    #render json: JSON.pretty_generate(JSON.parse(@challenge.to_json()))
     
     if @user.push(challenge_ids: @challenge.id) and @challenge.push(user_ids: @user.id)
       flash[:success] = "#{@challenge.name} successfully completed!"
