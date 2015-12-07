@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users, only: [:index, :create, :show, :update, :destroy]
       resources :challenges, only: [:index, :create, :show, :update, :destroy]
+      resources :user_specific, only: [:profile, :create,] #get User profile, post User challenges
     end
   end
   
