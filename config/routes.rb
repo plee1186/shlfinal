@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get 'login' => 'sessions_controller#new'
   post 'login' => 'sessions_controller#create'
   delete 'logout' => 'sessions_controller#destroy'
-  get 'profile' => 'user_specific#profile'
+  #get 'profile' => 'user_specific#profile'
   get 'user_specific/list'
   get 'user_specific/add'
   post 'user_specific/create'

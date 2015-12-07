@@ -8,7 +8,6 @@
       <th>Content</th>
       <th>Created at</th>
       <th>Created by</th>
-      <th colspan="3"></th>
     </tr>
   </thead>
 
@@ -18,7 +17,7 @@
         <td><%= shoutout.content %></td>
         <td><%= shoutout.created_at %></td>
         <td><% @user.each do |x| %>
-            <% if shoutout.id.include?(x.shoutout_ids) %>
+            <% if x.shoutout_ids.include?(shoutout.id) %>
               <%= x.user_name %>
             <% else %>
               <% "Anonymouse" %>
@@ -27,7 +26,6 @@
         <% end %>  
         </td>
       </tr>
-    <% end %>
   </tbody>
 </table>
 
