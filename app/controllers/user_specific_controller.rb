@@ -23,6 +23,40 @@ class UserSpecificController < ApplicationController
       redirect_to profile_path
     end
   end
+  
+  
+  #shoutout logic
+  def newshout
+    @shoutout = Shoutout.new
+  end
+
+  # POST /shoutouts
+  # POST /shoutouts.json
+  def createshout
+    @shoutout = Shoutout.new
+    @shoutout = current_user.shoutouts.build(shoutout_params)
+    if @shoutout.save
+      flash[:success] = "Made a shoutout created!"
+      redirect_to profile_path(current_user)
+    else
+      flash[:danger] = "Whoops something went wrong"
+      redirect_to profile_path(current_user)
+    end
+  end
+  
+  # DELETE /shoutouts/1
+  # DELETE /shoutouts/1.json
+  def destroyshout
+    @shoutout.destroy
+    redirect_to profile_path(current_user)
+  end
+  
+  private
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def shoutout_params
+    params.require(:shoutout).permit(:content)
+  end
 
 end
 

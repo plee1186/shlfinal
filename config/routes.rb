@@ -7,10 +7,13 @@ Rails.application.routes.draw do
   get 'user_specific/list'
   get 'user_specific/add'
   post 'user_specific/create'
+  get 'user_specific/newshout'
+  post 'user_specific/createshout'
+  delete 'user_specific/destroyshout'
   
   resources :challenges
   resources :users
-  resources :shoutouts
+  resources :shoutouts, only: [:index]
 
   root 'users#index'
   

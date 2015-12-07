@@ -31,21 +31,21 @@
 <br>
 
 <div>
-    <h3><%= "#{@user.user_name}'s shoutout posts" %></h3>
-    <h1>@user before <%= @user.shoutout_ids %></h5>
+    <h3>Your shoutouts to the message board</h3>
     <% if @user.shoutout_ids.empty? %>
-        <h1>@user if <%= JSON.pretty_generate(JSON.parse(@user.shoutout_ids.to_json())) %></h5>
-        <p>You have not made any Shoutouts yet. <%= link_to "Make a Shoutout", new_shoutout_path %></p>
+        <p>You have no shoutouts to the baords. <%= link_to "Shoutout the the boards", user_specific_newshout_path %></p>
     <% else %>
-        <% @shoutouts.each do |c| %>
-             <% if @user.shoutout_ids.include?(c.id) %>
-                 <p>WHAT THE FUCK!</p>
-             <% end %>
+        <% Shoutout.all.each do |s| %>
+            <% if @user.shoutout_ids.include?(s.id) %>
+                <p><%= s.content %></p>
+                <p><%= s.created_at %></p>
+                <p><%= button_to "Delete", user_specific_destroyshout_path, method: :delete %></p>
+                <br>
+            <% end %>
         <% end %>
-    <% end %>
-    <p><%= link_to "Make another shoutout", new_shoutout_path %></p>
+    <p><%= link_to "Make another shoutout", user_specific_newshout_path %></p>
 </div>
-
-
 <br>
-<%= link_to "See all user's JSON", api_v1_users_path %>
+<%= link_to "All users", users_paath %>
+<%= link_to "All challenges", challenges_path %>
+<%= link_to "The Message boards", shoutouts_path %>

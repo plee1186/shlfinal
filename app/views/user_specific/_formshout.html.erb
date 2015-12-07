@@ -1,4 +1,4 @@
-<%= form_for(@shoutout) do |f| %>
+<%= form_for(@shoutout, url: user_specific_createshout_path, method: :post) do |f| %>
   <div class="field">
     <%= f.label :content %><br>
     <%= f.text_area :content %>

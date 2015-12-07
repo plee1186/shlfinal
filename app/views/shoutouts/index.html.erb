@@ -14,9 +14,6 @@
     <% @shoutouts.each do |shoutout| %>
       <tr>
         <td><%= shoutout.content %></td>
-        <td><%= link_to 'Show', shoutout %></td>
-        <td><%= link_to 'Edit', edit_shoutout_path(shoutout) %></td>
-        <td><%= link_to 'Destroy', shoutout, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +21,4 @@
 
 <br>
 
-<%= link_to 'New Shoutout', new_shoutout_path %>
+<%= link_to 'back', :back %>
