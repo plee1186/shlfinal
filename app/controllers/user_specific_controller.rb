@@ -2,6 +2,7 @@ class UserSpecificController < ApplicationController
   
   def profile
     @user = current_user
+    @shoutouts = Shoutout.all
   end
   
   #GET list of incomplete challenges

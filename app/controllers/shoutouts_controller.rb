@@ -4,8 +4,8 @@ class ShoutoutsController < ApplicationController
   # GET /shoutouts
   # GET /shoutouts.json
   def index
-    #@shoutouts = Shoutout.all
-    @shoutouts = Shoutout.order_by(:created_at => 'desc')
+    @shoutouts = Shoutout.all
+    #@shoutouts = Shoutout.order_by(:created_at => 'desc')
   end
 
   # GET /shoutouts/1
@@ -15,15 +15,17 @@ class ShoutoutsController < ApplicationController
 
   # GET /shoutouts/new
   def new
+    @shoutout = Shoutout.new
+    @user = current_user
   end
 
   # POST /shoutouts
   # POST /shoutouts.json
   def create
-    @shoutout = Shoutout.new(shoutout_params)
-    @user = current_user
+    @shoutout = Shoutout.create(shoutout_params)
+    us = current_user
     
-    if @user.push(shoutout_ids: @shoutout.id)
+    if @shoutout.save and us.push(shoutout_ids: @shoutout.id)
       flash[:success] = "Shoutout at #{@shoutout.created_at} successfully created!"
       redirect_to profile_path
     else
