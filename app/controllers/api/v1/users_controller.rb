@@ -1,54 +1,61 @@
 class Api::V1::UsersController < Api::V1::BaseController
-    #Api::V1::BaseController
-    protect_from_forgery with: :null_session
+    before_filter :authenticate_user!, only: [:show, :update, :destroy]
     
     #/api/v1/users (GET all users) //
     def index
-        @users = User.all
-        render json: @users
+        users = User.all
+        users = policy_scope(users)
+        
+        render json: users
     end
     
     #/api/v1/users/:id (GET user) //
     def show
         @user = User.find(params[:id])
+        authorize @user
         render json: @user
     end
     
     ##/api/v1/users(:format) (POST) //
     def create
-        @user = User.create(user_name: params[:user_name], password: params[:password], password_confirmation: params[:password_confirmation])
+        @user = User.create(create_params)
         if @user.save
-            respond_to do |format|
-                format.json { render json: JSON.pretty_generate(JSON.parse(@user.to_json())) }
-            end
+            render json: @user, status: 201, location: api_v1_users_path(user.id)
         else
-            format.json { redirect_to api_v1_users_path, notice: "User could not be created" }
+            return api_error(status: 422, errors: user.errors) 
         end
     end
     
     #/api/v1/users/:id (DELETE) //
     def destroy
-        if User.find(params[:id]).nil?
-            #format.json { redirect_to api_v1_users_path, notice: "User with id #{params[:id]} cannot be found" }
-            render text: "User with id #{params[:id]} cannot be found"
+        user = User.find(params[:id])
+        authorize user
+        
+        if user.destroy
+            head status: 204
         else
-            @user = User.find(params[:id])
-            @user.destroy
-            render text: "User with id #{params[:id]} deleted"
+            return api_error(status: 500)
         end
     end
     
     #api/v1/users/:id(.:format) (PUT) //
     def update
-        if User.find(params[:id]).nil?
-            #render :status => 404, :json => {:status => "error", :errorcode => "11009", :message => "Invalid userid."}
-            render text: "User with id #{params[:id]} cannot be found"
+        user = User.find(params[:id])
+        authorize user
+        if user.update(update_params)
+            render json: user, status: 200, location: api_v1_users_path(user.id)
         else
-            @user = User.find(params[:id])
-            @user.update(email: params[:email], gender: params[:gender], fname: params[:fname], lname: params[:lname], yob: params[:yob], tos: params[:tos])
-            respond_to do |format|
-                format.json { render json: JSON.pretty_generate(JSON.parse(@user.to_json())) }
-            end
+            return api_error(status: 422, errors: user.errors) 
         end
+    end
+    
+    private
+    
+    def update_params
+        create_params
+    end
+    
+    def create_params
+        params.require(:user).permit(:user_name, :password, :password_confirmation).delete_if{ |k,v| v.nil? }
     end
 end
