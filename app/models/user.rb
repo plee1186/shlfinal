@@ -9,10 +9,10 @@ class User
   field :password_digest, type: String
   has_secure_password
   field :authentication_token, type: String
-  field :shoutout_ids, type: Array
+  #field :shoutout_ids, type: Array
   
   has_and_belongs_to_many :challenges
-  has_many :shoutouts
+  has_many :shoutouts, :inverse_of => :user
   
   
   private

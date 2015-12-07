@@ -3,5 +3,6 @@ class Shoutout
   include Mongoid::Timestamps
   field :content, type: String
   
-  belongs_to :user
+  belongs_to :user, :inverse_of => :shoutouts
+  
 end
